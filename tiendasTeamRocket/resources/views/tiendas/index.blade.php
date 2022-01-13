@@ -28,7 +28,7 @@
                 <td>
                     {{--Ver la ficha completa--}}
                         <a href="./tiendas/{{$tienda->id}}"><i class="fas fa-eye"></i></a>
-                    {{--Eliminar este plotter--}}
+                    {{--Eliminar este comercio--}}
                     <form action="{{route('tiendas.destroy',['tienda' => $tienda])}}" method="post">
                       @method('DELETE')
                       @csrf
