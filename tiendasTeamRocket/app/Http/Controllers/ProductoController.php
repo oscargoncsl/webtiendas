@@ -19,10 +19,10 @@ class ProductoController extends Controller
     public function index()
     {
         //Controlador accede al modelo para enviarselo a vista 
-        $plotters = Producto::all();
+        $productos = Producto::all();
         
         //Devolvemos la vista
-         return view('plotters.index',['maquinas'=> $plotters]);
+         return view('productos.index',['productos'=> $productos]);
     }
 
     /**
