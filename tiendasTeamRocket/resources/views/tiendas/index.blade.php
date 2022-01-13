@@ -10,7 +10,6 @@
     Añadir comercio
   </button>
 </h2>
-
   <table class="table">
     <thead class="thead-dark">
       <tr>
@@ -34,19 +33,11 @@
                       @csrf
                       <button type="submit" class="btn btn-small btn-warning" ><i class="fas fa-trash"></i> Eliminar </button>
                     </form>
-
                 </td>
-
             </tr>
         @endforeach
     </tbody>
   </table>
-
-
-
-
-
-
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -60,7 +51,6 @@
       </div>
       <div class="modal-body">
 
-
           <div class="col-md-6">
             <label for="nombre" class="form-label">Nombre</label>
             <input type="text" class="form-control" id="nombre" name="nombre">
@@ -71,8 +61,6 @@
             <input type="text" class="form-control" id="ubicacion" placeholder="Autonomia 32">
           </div>
           
-
-
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
