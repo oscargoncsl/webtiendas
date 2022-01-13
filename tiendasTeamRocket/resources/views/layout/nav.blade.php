@@ -9,7 +9,7 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         
         <li class="nav-item">
-          <a class="nav-link" href="#">Listado comercios</a>
+          <a class="nav-link" href="{{route('tiendas.index')}}">Listado comercios</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Acceso</a>

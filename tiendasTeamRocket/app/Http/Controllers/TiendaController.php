@@ -18,7 +18,11 @@ class TiendaController extends Controller
      */
     public function index()
     {
-        //
+        //Controlador accede al modelo para enviarselo a vista 
+        $tiendas = Tienda::all();
+        
+        //Devolvemos la vista
+         return view('tiendas.index',['tiendas'=> $tiendas]);
     }
 
     /**
@@ -28,12 +32,7 @@ class TiendaController extends Controller
      */
     public function create()
     {
-          //Controlador accede al modelo para enviarselo a vista 
-        $tiendas = Tienda::all();
-        
-        
-        //Devolvemos la vista
-         return view('tiendas.index',['tiendas'=> $tiendas]);
+
     }
 
     /**
@@ -68,22 +67,13 @@ class TiendaController extends Controller
 
                 //Generar plotter
                 $tienda=new Tienda();
-                $plotter->marca=$datos["marca"];
-                $plotter->modelo=$datos["modelo"];
-                $plotter->nombre=$datos["nombre"];
-                $plotter->descripcion=$datos["descripcion"];
-                $plotter->velocidad=$datos["velocidad"];
-                
-            
-            //Generar un nombre único para la imagen
-            $nombreImagen=Str::random(30)."-".$request->file('imagen')->getClientOriginalName();
-            //Asociarselo al modelo
-            $plotter->imagen=$nombreImagen;
+                $tienda->nombre=$datos["nombre"];
+                $tienda->ubicacion=$datos["ubicacion"];
+                        
             try{
                 //Almacenar en la BD 
                 $tienda->save();
-                //Almacenar el archivo en el servidor
-                $request->file('imagen')->move('images/plotters',$nombreImagen);   
+                //Almacenar el archivo en el servidor 
                     //Volver al listado
                     //Mensaje de OK
                     Session::flash('tipoMensaje','success');

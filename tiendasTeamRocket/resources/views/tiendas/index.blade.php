@@ -4,7 +4,7 @@
 
 
 
-<h2>Plotters   <!-- Button trigger modal -->
+<h2>Tiendas   <!-- Button trigger modal -->
     <!-- Button trigger modal -->
   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
     Añadir
@@ -14,26 +14,24 @@
   <table class="table">
     <thead class="thead-dark">
       <tr>
-        <th scope="col">Nombe</th>
-        <th scope="col"></th>
-        <th scope="col">Descripción</th>
-        <th scope="col">Opciones</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Descripcion</th>
+        <th scope="col">Direccion</th>
       </tr>
     </thead>
     <tbody>
-        @foreach ($maquinas as $plotter)
+        @foreach ($tiendas as $tienda)
             <tr>
-                <th scope="row">{{$plotter->marca}} </th>
-                <td>{{ $plotter->modelo }}</td>
-                <td>{{ $plotter->descripcion }}</td>
+                <th scope="row">{{$tienda->nombre}} </th>
+                <td>{{ $tienda->descripcion}}</td>
+                <td>{{ $tienda->direccion}}</td>
                 <td>
                     {{--Ver la ficha completa--}}
-                        <a href="./plotters/{{$plotter->id}}"><i class="fas fa-eye"></i></a>
+                        <a href="./tiendas/{{$tienda->id}}"><i class="fas fa-eye"></i></a>
                     {{--Eliminar este plotter--}}
-                    <form action="{{route('plotters.destroy',['plotter' => $plotter])}}" method="post">
+                    <form action="{{route('tiendas.destroy',['tienda' => $tienda])}}" method="post">
                       @method('DELETE')
                       @csrf
-
                       <button type="submit" class="btn btn-small btn-warning" ><i class="fas fa-trash"></i> Eliminar </button>
                     </form>
 
@@ -52,7 +50,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <form class="row g-3" action="{{route('plotters.store')}}" method="post"  enctype="multipart/form-data"  >
+  <form class="row g-3" action="{{route('tiendas.store')}}" method="post"  enctype="multipart/form-data"  >
     {{csrf_field()}}
     <div class="modal-dialog">
     <div class="modal-content">
