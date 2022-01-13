@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,11 +13,10 @@
     @yield('estilos')
   </head>
 <body>
-    
+
 
 @include('layout.nav')
   <div  class="col-10 mx-auto mt-3" id="contenido">
-    @include('layout.alertas')    
     @yield("contenido")
   </div>
 </body>
