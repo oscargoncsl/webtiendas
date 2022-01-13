@@ -20,7 +20,7 @@
       </tr>
     </thead>
     <tbody>
-        @foreach ($maquinas as $plotter)
+        <!-- @foreach ($maquinas as $plotter)
             <tr>
                 <th scope="row">{{$plotter->marca}} </th>
                 <td>{{ $plotter->modelo }}</td>
@@ -39,7 +39,7 @@
                 </td>
 
             </tr>
-        @endforeach
+        @endforeach -->
     </tbody>
   </table>
 
