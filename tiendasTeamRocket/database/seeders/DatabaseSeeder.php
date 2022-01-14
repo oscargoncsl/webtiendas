@@ -1,8 +1,9 @@
 <?php
-
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\User;
+use App\Models\Role;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,6 +14,25 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // User::factory(10)->create();
+        $roles = array("tienda","admin");
+        foreach ($roles as $role){
+            $rolCreado=Role::factory()->create([
+                'name'=>$role
+            ]);
+        }
+        
+        User::factory(10)->create();
+
+        $rolAdmin=Role::where('name','admin')->first();
+
+        User::factory()->create([
+            'name' => 'Borja',
+            'email' => 'borja2626@gmail.com',
+            'email_verified_at' => now(),
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'role_id' => $rolAdmin->id
+        ]);
     }
 }
+
+

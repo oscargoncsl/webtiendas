@@ -16,10 +16,10 @@ class ProductoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($tienda_id)
     {
         //Controlador accede al modelo para enviarselo a vista 
-        $productos = Producto::all();
+        $productos = Producto::where('tienda_id', $tienda_id);
         
         //Devolvemos la vista
          return view('productos.index',['productos'=> $productos]);

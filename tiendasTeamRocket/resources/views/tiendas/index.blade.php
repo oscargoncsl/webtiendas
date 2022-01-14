@@ -14,16 +14,14 @@
     <thead class="thead-dark">
       <tr>
         <th scope="col">Nombre</th>
-        <th scope="col">Descripcion</th>
-        <th scope="col">Direccion</th>
+        <th scope="col">Ubicacion</th>
       </tr>
     </thead>
     <tbody>
         @foreach ($tiendas as $tienda)
             <tr>
                 <th scope="row">{{$tienda->nombre}} </th>
-                <td>{{ $tienda->descripcion}}</td>
-                <td>{{ $tienda->direccion}}</td>
+                <td>{{$tienda->ubicacion}}</td>
                 <td>
                     {{--Ver la ficha completa--}}
                         <a href="./tiendas/{{$tienda->id}}"><i class="fas fa-eye"></i></a>
@@ -66,9 +64,8 @@
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
         <button type="submit" class="btn btn-primary">Añadir comercio</button>
       </div>
-
     </div>
-  </div>
-</form>
+    </div>
+  </form>
 </div>
 @endsection

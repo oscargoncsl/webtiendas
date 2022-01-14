@@ -11,6 +11,15 @@ use Illuminate\Support\Facades\Redirect;
 
 class TiendaController extends Controller
 {
+       public function __construct()
+    {
+        //$this->middleware('auth');  //Todo lo que afecta a este controlador
+        //$this->middleware('auth')->only('show','index');   //Solo a estas dos funciones
+        //$this->middleware('auth')->except('index'); //Afecta a todo excepto a index
+        $this->middleware('admin');
+        $this->middleware('tienda')->only('index, show');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -43,15 +52,18 @@ class TiendaController extends Controller
      */
     public function store(Request $request)
     {
-       //Recibir datos
+        //Recibir datos
         $datos=$request->all();
+        $a=  $request->input('ubicacion');
        //Validar datos
        $rules= array (
-        'nombre' => 'required',
+         'nombre' => 'required',
+        // 'ubicacion' => 'required',
        );
 
        $messages= array (
-        'nombre.required' => 'Campo nombre es requerido',
+         'nombre.required' => 'Campo nombre es requerido',
+        // 'ubicacion.required' => 'Campo nombre es requerido',
        );
 
        $validador= Validator::make($datos,$rules,$messages);
@@ -64,12 +76,11 @@ class TiendaController extends Controller
             
             return Redirect::back()->withInput()->withErrors($validador);
         }else{
-
-                //Generar plotter
                 $tienda=new Tienda();
                 $tienda->nombre=$datos["nombre"];
-                $tienda->ubicacion=$datos["ubicacion"];
-                        
+                $tienda->ubicacion= $datos["nombre"];
+                $tienda->id_comerciante=1;
+
             try{
                 //Almacenar en la BD 
                 $tienda->save();
@@ -80,7 +91,7 @@ class TiendaController extends Controller
                     Session::flash('mensaje','Plotter creado correctamente');
                 
             }catch(\Exception $e){
-                //echo $e->getMessage();
+                echo $e->getMessage();
                 //Mensaje de KO
                 Session::flash('tipoMensaje','danger');
                 Session::flash('mensaje','Error al crear el plotter');

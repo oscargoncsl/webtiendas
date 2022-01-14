@@ -11,23 +11,41 @@
         <li class="nav-item">
           <a class="nav-link" href="{{route('tiendas.index')}}">Listado comercios</a>
         </li>
+        @if(!Auth::check())
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('login')}}">Acceso</a>
+          </li>
+        @else
         <li class="nav-item">
-          <a class="nav-link" href="{{route('login')}}">Acceso</a>
-        </li>
-   
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="dropdown07" data-bs-toggle="dropdown" aria-expanded="false">Comercios</a>
-          <ul class="dropdown-menu" aria-labelledby="dropdown07">
-            <li><a class="dropdown-item" href="{{route('productos.index')}}">Ver listado productos</a></li>
-            <li><a class="dropdown-item" href="#">Añadir producto</a></li>
-          </ul>
-        </li>
+            {{-- Petición POST (La ruta así lo espera)  --}}
+            <a class="nav-link" aria-current="page" href="" 
+              onclick="event.preventDefault();
+                document.getElementById('logout').submit();" >
+              Cerrar Sesion
+            </a>
+            {{-- Solo usuarios identificados --}}
+            <form id="logout" action="{{route('logout')}}" method="POST" style="display:none">
+              @csrf
+            </form>
+          </li>
+        @endif
+        @if(Auth::check() && Auth::user()->roles->name=='tienda')
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown07" data-bs-toggle="dropdown" aria-expanded="false">Comercios</a>
+            <ul class="dropdown-menu" aria-labelledby="dropdown07">
+              <li><a class="dropdown-item" href="{{route('productos.index')}}">Ver listado productos</a></li>
+              <li><a class="dropdown-item" href="#">Añadir producto</a></li>
+            </ul>
+          </li>
+        @endif
+       @if(Auth::check() && Auth::user()->roles->name=='admin')
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="dropdown07" data-bs-toggle="dropdown" aria-expanded="false">Admin</a>
           <ul class="dropdown-menu" aria-labelledby="dropdown07">
             <li><a class="dropdown-item" href="#">Añadir comercio</a></li>
           </ul>
         </li>
+        @endif
       </ul>
     </div>
   </div>
