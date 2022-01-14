@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light" aria-label="Eighth navbar example">
   <div class="container">
-    <a class="navbar-brand" href="#">Tiendas Bilbao</a>
+    <a class="navbar-brand" href="{{ route ('home')}}">ComercioFelizBilbao</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>

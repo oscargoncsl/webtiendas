@@ -1,5 +1,5 @@
 @extends('layout.masterpage')
-@section('titulo','Listado de tiendas')
+@section('titulo','ComercioFelizBilbao')
 @section('contenido')
 
 
