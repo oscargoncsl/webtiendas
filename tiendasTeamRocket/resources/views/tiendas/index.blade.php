@@ -15,6 +15,8 @@
       <tr>
         <th scope="col">Nombre</th>
         <th scope="col">Ubicacion</th>
+        <th scope="col">Ver</th>
+        <th scope="col">Eliminar</th>
       </tr>
     </thead>
     <tbody>
@@ -25,11 +27,13 @@
                 <td>
                     {{--Ver la ficha completa--}}
                         <a href="./tiendas/{{$tienda->id}}"><i class="fas fa-eye"></i></a>
+                </td>
+                <td>
                     {{--Eliminar este comercio--}}
                     <form action="{{route('tiendas.destroy',['tienda' => $tienda])}}" method="post">
                       @method('DELETE')
                       @csrf
-                      <button type="submit" class="btn btn-small btn-warning" ><i class="fas fa-trash"></i> Eliminar </button>
+                      <button type="submit" class="btn btn-small btn-primary" ><i class="fas fa-trash"></i> </button>
                     </form>
                 </td>
             </tr>
