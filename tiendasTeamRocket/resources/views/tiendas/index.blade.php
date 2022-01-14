@@ -15,6 +15,7 @@
       <tr>
         <th scope="col">Nombre</th>
         <th scope="col">Ubicacion</th>
+        <th scope="col">Catálogo</th>
         <th scope="col">Ver</th>
         <th scope="col">Eliminar</th>
       </tr>
@@ -25,7 +26,11 @@
                 <th scope="row">{{$tienda->nombre}} </th>
                 <td>{{$tienda->ubicacion}}</td>
                 <td>
-                    {{--Ver la ficha completa--}}
+                  {{--Ver catálogo de tienda--}}
+                      <a href="./productos/{{$tienda->id}}"><i class="fas fa-book-open"></i></a>
+              </td>
+                <td>
+                    {{--Ver la ficha de tienda--}}
                         <a href="./tiendas/{{$tienda->id}}"><i class="fas fa-eye"></i></a>
                 </td>
                 <td>
