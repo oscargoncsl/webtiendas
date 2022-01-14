@@ -15,6 +15,7 @@
       <tr>
         <th scope="col">Nombre</th>
         <th scope="col">Ubicacion</th>
+        <th scope="col">Comerciante</th>
       </tr>
     </thead>
     <tbody>
@@ -22,6 +23,7 @@
             <tr>
                 <th scope="row">{{$tienda->nombre}} </th>
                 <td>{{$tienda->ubicacion}}</td>
+                <td>{{$tienda->user->name }}</td>
                 <td>
                     {{--Ver la ficha completa--}}
                         <a href="./tiendas/{{$tienda->id}}"><i class="fas fa-eye"></i></a>
@@ -57,6 +59,14 @@
           <div class="col-12">
             <label for="ubicacion" class="form-label">Ubicación</label>
             <input type="text" class="form-control" id="ubicacion" placeholder="Autonomia 32">
+          </div>
+          <div class="col-12">
+            <label for="usuario" class="form-label">Usuario</label>
+            <select name="usuario">
+              @foreach ($usuarios as $usuario)
+                <option value="{{$usuario->id}}">{{$usuario->name}}</option>
+              @endforeach
+            </select>
           </div>
           
       </div>

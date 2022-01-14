@@ -17,8 +17,8 @@ class CreateTiendasTable extends Migration
             $table->id();
             $table->string('nombre');
             $table->string('ubicacion');
-            // $table->bigInteger('id_comerciante')->unsigned(); //No negativos y mayor rango positivo
-            // $table->foreign('id_comerciante')->references('id')->on('users');
+            $table->bigInteger('id_comerciante')->unsigned(); //No negativos y mayor rango positivo
+            $table->foreign('id_comerciante')->references('id')->on('users');
             $table->timestamps();
         });
     }

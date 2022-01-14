@@ -6,15 +6,14 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarsExample07">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        
-        <li class="nav-item">
-          <a class="nav-link" href="{{route('tiendas.index')}}">Listado comercios</a>
-        </li>
-        @if(!Auth::check())
-          <li class="nav-item">
-            <a class="nav-link" href="{{ route('login')}}">Acceso</a>
-          </li>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">  
+      @if(!Auth::check())  
+      <!-- <li class="nav-item">
+        <a class="nav-link" href="{{route('tiendas.index')}}">Listado comercios</a>
+      </li>   -->
+      <li class="nav-item">
+        <a class="nav-link" href="{{ route('login')}}">Acceso</a>
+      </li>
         @else
         <li class="nav-item">
             {{-- Petición POST (La ruta así lo espera)  --}}
@@ -33,8 +32,10 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="dropdown07" data-bs-toggle="dropdown" aria-expanded="false">Comercios</a>
             <ul class="dropdown-menu" aria-labelledby="dropdown07">
-              <li><a class="dropdown-item" href="{{route('productos.index')}}">Ver listado productos</a></li>
-              <li><a class="dropdown-item" href="#">Añadir producto</a></li>
+              <li><a class="dropdown-item" href="{{route('tiendas.index', ['id'=>Auth::user()->id])}}">Listado comercios</a></li>
+            </ul>
+            <ul class="dropdown-menu" aria-labelledby="dropdown07">
+              <li><a class="dropdown-item" href="{{route('productos.index')}}">Listado productos</a></li>
             </ul>
           </li>
         @endif
@@ -42,7 +43,7 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="dropdown07" data-bs-toggle="dropdown" aria-expanded="false">Admin</a>
           <ul class="dropdown-menu" aria-labelledby="dropdown07">
-            <li><a class="dropdown-item" href="#">Añadir comercio</a></li>
+            <li><a class="dropdown-item" href="{{route('tiendas.index')}}">Listado comercios</a></li>
           </ul>
         </li>
         @endif

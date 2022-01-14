@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Tienda;
+use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
@@ -29,12 +30,19 @@ class TiendaController extends Controller
     public function index()
     {
         //Controlador accede al modelo para enviarselo a vista 
-        $tiendas = Tienda::all();
-        
-        //Devolvemos la vista
-         return view('tiendas.index',['tiendas'=> $tiendas]);
+        $usuarios = User::all();
+        if(!request()->has('id')){
+            return view('tiendas.index',['tiendas'=> Tienda::all(),'usuarios'=> $usuarios]); 
+        } else{
+            //echo Tienda::where('id_comerciante', request()->filled('r'))->first();
+            return view('tiendas.index',['tiendas'=> Tienda::where('id_comerciante', request()->id)->get(),'usuarios'=> $usuarios]);
         }
 
+        
+        
+        //Devolvemos la vista
+         
+    }
     /**
      * Show the form for creating a new resource.
      *
