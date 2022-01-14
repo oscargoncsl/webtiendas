@@ -2,17 +2,18 @@
 
 namespace Database\Factories;
 
-use App\Models\Tienda;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Producto;
+use App\Models\Tienda;
 
-class TiendaFactory extends Factory
+class ProductoFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Tienda::class;
+    protected $model = Producto::class;
 
     /**
      * Define the model's default state.
@@ -23,8 +24,10 @@ class TiendaFactory extends Factory
     {
         return [
             'nombre' => $this->faker->name,
-            'ubicacion' => $this->faker->address,
-
+            'descripcion' => $this->faker->sentence,
+            'precio' => $this->faker->randomDigit,
+            'imagen' =>$this->faker->image('public/images/productos',640,480),
+            'tienda_id' => Tienda::all()->random()->id,
         ];
     }
 }
