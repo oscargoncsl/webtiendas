@@ -16,8 +16,9 @@ class TiendaController extends Controller
         //$this->middleware('auth');  //Todo lo que afecta a este controlador
         //$this->middleware('auth')->only('show','index');   //Solo a estas dos funciones
         //$this->middleware('auth')->except('index'); //Afecta a todo excepto a index
-        $this->middleware('admin');
-        $this->middleware('tienda')->only('index, show');
+        //$this->middleware('invitado')->only('index', 'show');
+        //$this->middleware('admin');
+        // $this->middleware('tienda')->only('index', 'show');
     }
 
     /**

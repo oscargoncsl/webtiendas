@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Redirect;
 
 
 
-class Admin
+class TiendaMid
 {
     /**
      * Handle an incoming request.
@@ -24,14 +24,14 @@ class Admin
         //Verificar si el usuario que está intetando acceder al recursos es administrados
         
 
-        if(Auth::check() && Auth::user()->roles->name=='admin'){
+        if(Auth::check() && Auth::user()->roles->name=='tienda'){
              Session::flash('tipoMensaje','danger');
             Session::flash('mensaje','funciona');
             return $next($request);
         }else{
             Session::flash('tipoMensaje','danger');
             Session::flash('mensaje','No tiene privilegios para acceder');
-            return Redirect::back();
+            //return Redirect::back();
         }
 
         
