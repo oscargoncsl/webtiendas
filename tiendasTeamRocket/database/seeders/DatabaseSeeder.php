@@ -4,6 +4,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Role;
+use App\Models\Producto;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,8 +21,9 @@ class DatabaseSeeder extends Seeder
                 'name'=>$role
             ]);
         }
-        
+
         User::factory(10)->create();
+        Producto::factory(2)->create();
 
         $rolAdmin=Role::where('name','admin')->first();
 
