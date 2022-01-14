@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Producto;
+use App\Models\Tienda;
 
 class ProductoFactory extends Factory
 {
@@ -26,6 +27,7 @@ class ProductoFactory extends Factory
             'descripcion' => $this->faker->sentence,
             'precio' => $this->faker->randomDigit,
             'imagen' =>$this->faker->image('public/images/productos',640,480),
+            'tienda_id' => Tienda::all()->random()->id,
         ];
     }
 }

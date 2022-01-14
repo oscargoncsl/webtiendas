@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
 
         User::factory(10)->create();
         Tienda::factory(10)->create();
-        // Producto::factory(2)->create();
+        Producto::factory(2)->create();
 
         $rolAdmin=Role::where('name','admin')->first();
 
