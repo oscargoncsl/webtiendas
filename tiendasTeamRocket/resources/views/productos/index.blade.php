@@ -24,7 +24,6 @@
         @foreach ($productos as $producto)
             <tr>
                 <th scope="row">{{$producto->nombre}} </th>
-                <td>{{ $producto->id }}</td>
                 <td>{{ $producto->descripcion }}</td>
                 <td>{{ $producto->precio }}</td>
                 <td>

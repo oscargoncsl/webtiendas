@@ -22,14 +22,6 @@ class InvitadoMid
     public function handle(Request $request, Closure $next)
     {
         //Verificar si el usuario que está intetando acceder al recursos es administrados
-        
-
-        if(!Auth::check()){
-             Session::flash('tipoMensaje','danger');
-            Session::flash('mensaje','funciona');
-            return $next($request);
-        }
-
-        
+        return $next($request);
     }
 }
