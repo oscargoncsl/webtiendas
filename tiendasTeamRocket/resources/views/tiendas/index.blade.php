@@ -29,7 +29,7 @@
                 <td>{{$tienda->user->name }}</td>
                 <td>
                   {{--Ver catálogo de tienda--}}
-                      <a href="./productos/{{$tienda->id}}"><i class="fas fa-book-open"></i></a>
+                        <a href="./productos?id={{$tienda->id}}"><i class="fas fa-book-open"></i></a>
               </td>
                 <td>
                     {{--Ver la ficha de tienda--}}
@@ -77,7 +77,7 @@
               @endforeach
             </select>
           </div>
-          
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>

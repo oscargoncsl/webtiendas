@@ -22,18 +22,18 @@ class TiendaMid
     public function handle(Request $request, Closure $next)
     {
         //Verificar si el usuario que está intetando acceder al recursos es administrados
-        
+
 
         if(Auth::check() && Auth::user()->roles->name=='tienda'){
-             Session::flash('tipoMensaje','danger');
+            Session::flash('tipoMensaje','danger');
             Session::flash('mensaje','funciona');
             return $next($request);
         }else{
             Session::flash('tipoMensaje','danger');
             Session::flash('mensaje','No tiene privilegios para acceder');
-            //return Redirect::back();
+            return Redirect::back();
         }
 
-        
+
     }
 }
