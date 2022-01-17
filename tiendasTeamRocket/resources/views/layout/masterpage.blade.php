@@ -16,6 +16,7 @@
 
 
 @include('layout.nav')
+
   <div  class="col-10 mx-auto mt-3" id="contenido">
     @yield("contenido")
   </div>
