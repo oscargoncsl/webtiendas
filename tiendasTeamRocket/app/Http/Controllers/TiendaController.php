@@ -7,6 +7,7 @@ use App\Models\Tienda;
 use App\Models\User;
 use App\Models\Producto;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
@@ -160,25 +161,27 @@ class TiendaController extends Controller
 
     public function update(Request $request, Tienda $tienda)
     {
+        $tienda2=Tienda::find($tienda->id);
+        
         $datos=$request->all();
         // si los campos son null guarda elq ya tiene, sino coge el nuevo.
         if ($datos['ubicacion']!=null){
-            $tienda->ubicacion=$datos['ubicacion'];
+            $tienda2->ubicacion=$datos['ubicacion'];
         }
-        // if($datos==null){
-        //     \Session::flash('tipoMensaje', 'danger');
-        //     \Session::flash('mensaje', 'No has introducido ningun dato');
-        //     //si no has introducido ningun dato, manda mensaje error y vuelve a la pag de edit
-        //     return \Redirect::back();
-        // }//HABRIA K COMPROBAR TODOS LOS DATOS DE DATOS Y PLOTTER Y SI NO HAY CAMBIOS MANDAR SMS ERROR
+        if($datos==null){
+            Session::flash('tipoMensaje', 'danger');
+            Session::flash('mensaje', 'No has introducido ningun dato');
+            //si no has introducido ningun dato, manda mensaje error y vuelve a la pag de edit
+            return Redirect::back();
+        }//HABRIA K COMPROBAR TODOS LOS DATOS DE DATOS Y PLOTTER Y SI NO HAY CAMBIOS MANDAR SMS ERROR
 
         
-        $tienda->save();
+        $tienda2->save();
         Session::flash('tipoMensaje', 'info');
         Session::flash('mensaje', 'Cambios guardados con éxito');
 
         //volver al listado
-        return Redirect::back();
+        return Redirect::to(route('tiendas.index', ['id'=>Auth::user()->id]));
     }
 
     /**
@@ -189,9 +192,13 @@ class TiendaController extends Controller
      */
     public function destroy(Tienda $tienda)
     {
+        $productos = Producto::where('tienda_id', $tienda->id)->get();
+        foreach($productos as $producto){
+            $producto->delete();
+        }
         $tienda->delete();
         Session::flash('tipoMensaje','info');
         Session::flash('mensaje','Plotter borrado correctamente');
-        return Redirect::back();
+        return Redirect::to(route('tiendas.index'));
     }
 }

@@ -17,4 +17,8 @@ class Tienda extends Model
     public function user(){
         return $this->belongsTo(User::class,'id_comerciante');
     }
+
+    public function product(){
+        return $this->hasMany(Producto::class,'tienda_id');
+    }
 }

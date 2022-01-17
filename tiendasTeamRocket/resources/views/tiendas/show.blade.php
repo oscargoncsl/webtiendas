@@ -29,25 +29,28 @@
 </style>
 @endsection
 @section('contenido')
-<form action="{{route('tiendas.update',['tienda' => $tienda])}}" >
-	@method('PUT')
-	@csrf
-	<div class="card">
-		<div class="row">
-			<aside class="col-sm-7">
-	<article class="card-body p-5">
-		<h3 class="title mb-3">{{$tienda->nombre}}</h3>
 
-	<dl class="item-property">
-	<dt>Ubicación</dt>
-	<dd><p><input type="text" name="ubicacion" value="{{$tienda->ubicacion}}"> </p></dd>
-	</dl>
-
-		<a href="#" class="btn btn-lg btn-success text-uppercase"> Actualizar </a>
-		<a href="#" class="btn btn-lg btn-outline-danger text-uppercase"> <i class="fas fa-shopping-cart"></i> Eliminar </a>
-	</article> <!-- card-body.// -->
-			</aside> <!-- col.// -->
-		</div> <!-- row.// -->
-	</div> <!-- card.// -->
-</form>
+<div class="card">
+	<div class="row">
+		<aside class="col-sm-7">
+			<article class="card-body p-5">
+				<form action="{{route('tiendas.update',['tienda' => $tienda])}}" method="POST">
+					@method('PUT')
+					@csrf
+					<h3 class="title mb-3">{{$tienda->nombre}}</h3>
+					<dl class="item-property">
+						<dt>Ubicación</dt>
+						<dd><p><input type="text" name="ubicacion" value="{{$tienda->ubicacion}}"> </p></dd>
+					</dl>
+					<a><input type="submit" class="btn btn-lg btn-success text-uppercase" value="Actualizar"></input></a>
+				</form>
+				<form action="{{route('tiendas.destroy',['tienda' => $tienda])}}" method="post">
+     @method('DELETE')
+     @csrf
+     <button type="submit" class="btn btn-lg btn-outline-danger text-uppercase" ><i class="fas fa-shopping-cart"></i>Eliminar </button>
+    </form>
+			</article> <!-- card-body.// -->
+		</aside> <!-- col.// -->
+	</div> <!-- row.// -->
+</div> <!-- card.// -->
 @endsection

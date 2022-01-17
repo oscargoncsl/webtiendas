@@ -42,7 +42,7 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class, 'role_id');
     }
 
-        public function tienda(){
+    public function tienda(){
         return $this->hasMany(Tienda::class, 'id_comerciante');
     }
 }

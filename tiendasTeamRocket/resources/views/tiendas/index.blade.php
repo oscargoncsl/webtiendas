@@ -6,10 +6,10 @@
 
 <h2>Tiendas   <!-- Button trigger modal -->
     <!-- Button trigger modal -->
-    @if(Auth::check())
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Añadir comercio
-    </button>
+    @if(Auth::check() && Auth::user()->roles->name=='admin')
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          Añadir comercio
+      </button>
     @endif
 
 </h2>
@@ -18,10 +18,12 @@
       <tr>
         <th scope="col">Nombre</th>
         <th scope="col">Ubicacion</th>
+            @if(Auth::check() && Auth::user()->roles->name=='admin')
         <th scope="col">Comerciante</th>
+        @endif
         <th scope="col">Catálogo</th>
-        <th scope="col">Ver</th>
         @if(Auth::check())
+        <th scope="col">Ver</th>
         <th scope="col">Eliminar</th>
         @endif
       </tr>
@@ -31,16 +33,19 @@
             <tr>
                 <th scope="row">{{$tienda->nombre}} </th>
                 <td>{{$tienda->ubicacion}}</td>
+               @if(Auth::check() && Auth::user()->roles->name=='admin')
                 <td>{{$tienda->user->name }}</td>
+                 @endif
                 <td>
                   {{--Ver catálogo de tienda--}}
                         <a href="./productos?id={{$tienda->id}}"><i class="fas fa-book-open"></i></a>
-              </td>
-                <td>
-                    {{--Ver la ficha de tienda--}}
-                        <a href="./tiendas/{{$tienda->id}}"><i class="fas fa-eye"></i></a>
                 </td>
-                @if(Auth::check())
+              @if(Auth::check() && Auth::user()->roles->name=='tienda' && Auth::user()->id==$tienda->user->id )
+                <td>
+                    {{--Ver la ficha de tienda y editarla--}}
+                        <a href="./tiendas/{{$tienda->id}}"><i class="fas fa-edit"></i></a>
+                </td>
+
                 <td>
                     {{--Eliminar este comercio--}}
                     <form action="{{route('tiendas.destroy',['tienda' => $tienda])}}" method="post">

@@ -37,7 +37,7 @@ class ProductoController extends Controller
             return view('productos.index',['productos'=> Producto::all()]);
         } else{
             //echo Tienda::where('id_comerciante', request()->filled('r'))->first();
-            return view('productos.index',['productos'=> Producto::where('tienda_id', request()->id)->get()]);
+            return view('productos.index',['productos'=> Producto::where('tienda_id', request()->id)->get(),'id'=>request()->id]);
         }
     }
     /**
@@ -58,6 +58,11 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
+       Session::flash('message', 'This is a message!'); 
+Session::flash('alert-class', 'alert-danger'); 
+       
+        Session::flash('tipoMensaje','danger');
+        Session::flash('mensaje','Error, no se cumplen las validaciones. Compruebe todos los campos');
         //Recibir datos
         $datos=$request->all();
        //Validar datos
@@ -68,11 +73,13 @@ class ProductoController extends Controller
        );
 
        $messages= array (
-        'nombre' => 'Campo nombre es requerido',
-        'descripcion' =>'Campo descripcion es requerido',
+        'nombre.required' => 'Campo nombre es requerido',
+        'descripcion.required' =>'Campo descripcion es requerido',
         'precio.required' => 'Campo precio es requerido',
         'precio.numeric' => 'Campo precio debe ser numerico',
        );
+
+
 
        $validador= Validator::make($datos,$rules,$messages);
        if($validador->fails()){
@@ -90,7 +97,7 @@ class ProductoController extends Controller
                 $producto->precio=$datos["precio"];
                 $producto->imagen="a";
                 //$producto->imagen=$datos["imagen"];
-                $producto->tienda_id=Auth::user()->id;
+                $producto->tienda_id=$datos["tiendaId"];
             }
             try{
                 //Almacenar en la BD
@@ -98,8 +105,8 @@ class ProductoController extends Controller
                 //Almacenar el archivo en el servidor
                     //Volver al listado
                     //Mensaje de OK
-                    Session::flash('tipoMensaje','success');
-                    Session::flash('mensaje','Plotter creado correctamente');
+                Session::flash('tipoMensaje','success');
+                Session::flash('mensaje','Plotter creado correctamente');
 
             }catch(\Exception $e){
                 echo $e->getMessage();
@@ -128,13 +135,13 @@ class ProductoController extends Controller
      */
     public function show($id)
     {
-        $productos=Producto::find($id);
-       if (is_null($productos))
+        $producto=Producto::find($id);
+       if (is_null($producto))
         echo "No existe el plotter solicitado";
        else
        {
         //Devolvemos la vista
-        return view('productos.show',['producto'=> $productos]);
+        return view('productos.show',['producto'=> $producto]);
        }
     }
 
@@ -156,52 +163,36 @@ class ProductoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Producto $producto)
     {
-        $datos = $request->all();
+        $producto2=Producto::find($producto->id);
         
-        $rules=array(
-            'imagen'=>'required|mimes:jpeg,jpg|max:1024*1024*1',
-            'brand'=>'required',
-            'IAMSPEED'=>'required|numeric',
-        );
-        $messages=array(
-            'imagen.required'=>'campo imagen es requerido',
-            //'imagen.mimes'=>'el tipo de archivo debe ser una imagen',
-            'imagen.image'=>'el tipo de archivo debe ser una imagen',
-            'imagen.max'=>'el tamaño de la imagen es excesivo',
-            'brand.required'=>'campo marca es requerido',
-            'IAMSPEED.required'=>'campo velocidad requerido',
-            'IAMSPEED.numeric'=>'campo velocidad debe ser un numero',
-        );
-        $validador=Validator::make($datos,$rules,$messages);
-        if($validador->fails()){
-            $errors=$validador->messages();
-            Session::flash('tipoMensaje','danger');
-            Session::flash('mensaje','Error,no se cumplen las validaciones.Compuebe los campos');
-            return Redirect::back()->withInput()->withErrors($validador);
-        }else{
-            $tienda=Tienda::find($id);
-            $tienda->ubicacion = $datos["ubicacion"];
-            
-            try{
-                //Almacenar en la BD
-                $tienda->save();
-
-                //Volver al listado
-                Session::flash('tipoMensaje','success');
-                Session::flash('mensaje','Plotter creado correctamente');
-                        //Volver al listado
-                return Redirect::back();
-            }catch(\Exception $e){
-                //$e->getMessage();
-                //volver a la página anterior con errores
-                Session::flash('tipoMensaje','danger');
-                Session::flash('mensaje','Error al crear el Plotter');
-            }
+        $datos=$request->all();
+        // si los campos son null guarda elq ya tiene, sino coge el nuevo.
+        if ($datos['descripcion']!=null){
+            $producto2->descripcion=$datos['descripcion'];
         }
-        return Redirect::back();
-        //echo "Plotter Creado";
+        if ($datos['precio']!=null){
+            $producto2->precio=$datos['precio'];
+        }
+        if($datos==null){
+            Session::flash('tipoMensaje', 'danger');
+            Session::flash('mensaje', 'No has introducido ningun dato');
+            //si no has introducido ningun dato, manda mensaje error y vuelve a la pag de edit
+            return Redirect::back();
+        }//HABRIA K COMPROBAR TODOS LOS DATOS DE DATOS Y PLOTTER Y SI NO HAY CAMBIOS MANDAR SMS ERROR
+
+        
+        $producto2->save();
+        Session::flash('tipoMensaje', 'info');
+        Session::flash('mensaje', 'Cambios guardados con éxito');
+
+        //volver al listado
+        // return Redirect::to(route('productos.index', ['id'=>$producto2->tienda()]));
+        $url = route('productos.index');
+        $url .= "?id=";
+        $url .= strval($producto->tienda->id);
+        return Redirect::to($url);
     }
 
     /**

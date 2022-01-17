@@ -6,7 +6,7 @@
 
 <h2>Catalogo   <!-- Button trigger modal -->
     <!-- Button trigger modal -->
-  @if(Auth::check())
+  @if(Auth::check() && Auth::user()->roles->name=='tienda')
   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
     Añadir productos
   </button>
@@ -19,8 +19,10 @@
         <th scope="col">Nombre</th>
         <th scope="col">Descripción</th>
         <th scope="col">Precio</th>
-        <th scope="col">Ari quiere un cambio</th>
-        <th scope="col">Opciones</th>
+        @if(Auth::check())
+        <th scope="col">Ver</th>
+        <th scope="col">Eliminar</th>
+        @endif
       </tr>
     </thead>
     <tbody>
@@ -29,28 +31,25 @@
                 <th scope="row">{{$producto->nombre}} </th>
                 <td>{{ $producto->descripcion }}</td>
                 <td>{{ $producto->precio }}</td>
-                <td>
+                @if(Auth::check())
+                  <td>
                     {{--Ver la ficha completa--}}
-                        <a href="./productos/{{$producto->id}}"><i class="fas fa-eye"></i></a>
+                        <a href="./productos/{{$producto->id}}"><i class="fas fa-edit"></i></a>
                     {{--Eliminar este producto--}}
+                  </td>
+                  <td>
                     <form action="{{route('productos.destroy',['producto' => $producto])}}" method="post">
                       @method('DELETE')
                       @csrf
-
-                      <button type="submit" class="btn btn-small btn-warning" ><i class="fas fa-trash"></i> Eliminar </button>
+                      <button type="submit" class="btn btn-small btn-primary" ><i class="fas fa-trash"></i> </button>
                     </form>
-
-                </td>
-
+                  </td>
+                @endif
             </tr>
         @endforeach
 
     </tbody>
   </table>
-
-
-
-
 
 
 
@@ -70,10 +69,10 @@
             <label for="nombre" class="form-label">Nombre</label>
             <input type="text" class="form-control" id="nombre" name="nombre">
           </div>
-          <div class="col-md-6">
+          <!-- <div class="col-md-6">
             <label for="marca" class="form-label">Ref</label>
             <input type="text" class="form-control" id="id" name="id">
-          </div>
+          </div> -->
           <div class="col-12">
             <label for="descripcion" class="form-label">Descripcion</label>
             <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Bla bla bla....">
@@ -87,6 +86,7 @@
             <input class="form-control" type="file" id="imagen" name="imagen">
           </div>
           <div class="col-12">
+            <input id="tiendaId" name="tiendaId" type="hidden" value={{$id}}>
           </div>
 
 

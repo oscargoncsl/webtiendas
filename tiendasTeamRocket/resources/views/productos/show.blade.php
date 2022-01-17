@@ -32,13 +32,14 @@
 </style>
 @endsection
 @section('contenido')
-<form action="{{route('productos.update',['producto' => $producto])}}" method="post">
-	@method('PUT')
-	@csrf
+
 	<div class="card">
 		<div class="row">
 			<aside class="col-sm-5 border-right">
-	<article class="gallery-wrap"> 
+	<form action="{{route('productos.update',['producto' => $producto])}}" method="post">
+	@method('PUT')
+	@csrf
+			<article class="gallery-wrap"> 
 	<div class="img-big-wrap">
 	<div> <a href="#"><img src="../images/producto/{{$producto->imagen}}" style="width:100%;"></a></div>
 	</div> <!-- slider-product.// -->
@@ -56,18 +57,16 @@
 
 	<dl class="item-property">
 	<dt>Ref</dt>
-	<dd><p><input type="text" name="id" value="{{$producto->id}}"> </p></dd>
+	<dd><p>{{$producto->id}} </p></dd>
 	</dl>
 	<dl class="param param-feature">
 	<dt>Descripción</dt>
 	<dd><input type="text" name="descripcion" value="{{$producto->descripcion}}"></dd>
 	</dl>  <!-- item-property-hor .// -->
 	<dl class="param param-feature">
-	<dt>Precio</dt>
-	<dd><input type="number" name="precio" value="{{$producto->precio}}"></dd>
+		<dt>Precio</dt>
+		<dd><input type="number" name="precio" value="{{$producto->precio}}"></dd>
 	</dl>  <!-- item-property-hor .// -->
-
-
 	<hr>
 		<div class="row">
 			<div class="col-sm-5">
@@ -85,13 +84,14 @@
 			
 		</div> <!-- row.// -->
 		<hr>
-		<a href="#" class="btn btn-lg btn-success text-uppercase"> Actualizar </a>
+			<a><input type="submit" class="btn btn-lg btn-success text-uppercase" value="Actualizar"></input></a>
+		</form>
 		<a href="#" class="btn btn-lg btn-outline-danger text-uppercase"> <i class="fas fa-shopping-cart"></i> Eliminar </a>
 	</article> <!-- card-body.// -->
 			</aside> <!-- col.// -->
 		</div> <!-- row.// -->
 	</div> <!-- card.// -->
-</form>
+
 @endsection
 
 

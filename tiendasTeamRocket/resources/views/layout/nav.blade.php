@@ -34,9 +34,6 @@
             <ul class="dropdown-menu" aria-labelledby="dropdown07">
               <li><a class="dropdown-item" href="{{route('tiendas.index', ['id'=>Auth::user()->id])}}">Listado comercios</a></li>
             </ul>
-            <ul class="dropdown-menu" aria-labelledby="dropdown07">
-              <li><a class="dropdown-item" href="{{route('productos.index')}}">Listado productos</a></li>
-            </ul>
           </li>
         @endif
        @if(Auth::check() && Auth::user()->roles->name=='admin')
