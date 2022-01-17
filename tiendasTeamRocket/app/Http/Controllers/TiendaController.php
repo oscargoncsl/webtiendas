@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
+use Symfony\Component\Console\Output\ConsoleOutput;
 
 class TiendaController extends Controller
 {
@@ -155,10 +156,29 @@ class TiendaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+     */    
+
+    public function update(Request $request, Tienda $tienda)
     {
-        //
+        $datos=$request->all();
+        // si los campos son null guarda elq ya tiene, sino coge el nuevo.
+        if ($datos['ubicacion']!=null){
+            $tienda->ubicacion=$datos['ubicacion'];
+        }
+        // if($datos==null){
+        //     \Session::flash('tipoMensaje', 'danger');
+        //     \Session::flash('mensaje', 'No has introducido ningun dato');
+        //     //si no has introducido ningun dato, manda mensaje error y vuelve a la pag de edit
+        //     return \Redirect::back();
+        // }//HABRIA K COMPROBAR TODOS LOS DATOS DE DATOS Y PLOTTER Y SI NO HAY CAMBIOS MANDAR SMS ERROR
+
+        
+        $tienda->save();
+        Session::flash('tipoMensaje', 'info');
+        Session::flash('mensaje', 'Cambios guardados con éxito');
+
+        //volver al listado
+        return Redirect::back();
     }
 
     /**
