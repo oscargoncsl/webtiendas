@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Tienda;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TiendaFactory extends Factory
@@ -24,6 +25,7 @@ class TiendaFactory extends Factory
         return [
             'nombre' => $this->faker->name,
             'ubicacion' => $this->faker->address,
+            'id_comerciante' =>User::all()->random()->id,
 
         ];
     }
