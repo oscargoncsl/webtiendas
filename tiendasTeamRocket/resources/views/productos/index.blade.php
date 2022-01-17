@@ -18,7 +18,7 @@
       <tr>
         <th scope="col">Nombre</th>
         <th scope="col">Descripción</th>
-        <th scope="col">Precios</th>
+        <th scope="col">Precio</th>
         <th scope="col">Opciones</th>
       </tr>
     </thead>
@@ -43,10 +43,7 @@
 
             </tr>
         @endforeach
-        <form method="POST" action="">
-            <input type="text" placeholder="Introduce tu nombre" >
-            <input type="email" placeholder="Introduce tu correo">
-        </form>
+
     </tbody>
   </table>
 
@@ -101,5 +98,10 @@
     </div>
   </div>
 </form>
+<!--Envio correo de listado de productos-->
+<form method="POST" action="">
+            <input type="text" placeholder="Introduce tu nombre" ></br>
+            <input type="email" placeholder="Introduce tu correo">
+        </form>
 </div>
 @endsection
