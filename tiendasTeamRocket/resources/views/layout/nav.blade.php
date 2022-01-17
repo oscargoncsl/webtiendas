@@ -6,18 +6,18 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarsExample07">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">  
-      @if(!Auth::check())  
-      <!-- <li class="nav-item">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      @if(!Auth::check())
+      <li class="nav-item">
         <a class="nav-link" href="{{route('tiendas.index')}}">Listado comercios</a>
-      </li>   -->
+      </li>
       <li class="nav-item">
         <a class="nav-link" href="{{ route('login')}}">Acceso</a>
       </li>
         @else
         <li class="nav-item">
             {{-- Petición POST (La ruta así lo espera)  --}}
-            <a class="nav-link" aria-current="page" href="" 
+            <a class="nav-link" aria-current="page" href=""
               onclick="event.preventDefault();
                 document.getElementById('logout').submit();" >
               Cerrar Sesion

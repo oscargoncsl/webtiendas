@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Producto;
 use Illuminate\Http\Request;
 use App\Models\Tienda;
+use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
@@ -18,8 +19,7 @@ class ProductoController extends Controller
         //$this->middleware('auth');  //Todo lo que afecta a este controlador
         //$this->middleware('auth')->only('show','index');   //Solo a estas dos funciones
         //$this->middleware('auth')->except('index'); //Afecta a todo excepto a index
-        $this->middleware('tienda')->only('index', 'show');
-        $this->middleware('tienda')->only('store','create','destroy','update','edit');
+        $this->middleware('tienda')->only('index', 'show','store','create','destroy','update','edit');
 
     }
 
@@ -30,13 +30,15 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        //Controlador accede al modelo para enviarselo a vista 
-        $productos = Producto::all();
-        
-        //Devolvemos la vista
-         return view('productos.index',['productos'=> $productos]);
+        //Controlador accede al modelo para enviarselo a vista
+        $usuarios = User::all();
+        if(!request()->has('id')){
+            return view('productos.index',['productos'=> Producto::all()]);
+        } else{
+            //echo Tienda::where('id_comerciante', request()->filled('r'))->first();
+            return view('productos.index',['productos'=> Producto::where('tienda_id', request()->id)->get()]);
         }
-
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -78,7 +80,7 @@ class ProductoController extends Controller
             Session::flash('tipoMensaje','danger');
             Session::flash('mensaje','Error, no se cumplen las validaciones. Compruebe todos los campos');
             //Volver con los errores
-            
+
             return Redirect::back()->withInput()->withErrors($validador);
         }else{
                 $producto=new Producto();
@@ -90,14 +92,14 @@ class ProductoController extends Controller
                 $producto->tienda_id=Auth::user()->id;
             }
             try{
-                //Almacenar en la BD 
+                //Almacenar en la BD
                 $producto->save();
-                //Almacenar el archivo en el servidor 
+                //Almacenar el archivo en el servidor
                     //Volver al listado
                     //Mensaje de OK
                     Session::flash('tipoMensaje','success');
                     Session::flash('mensaje','Plotter creado correctamente');
-                
+
             }catch(\Exception $e){
                 echo $e->getMessage();
                 //Mensaje de KO
@@ -111,7 +113,7 @@ class ProductoController extends Controller
 
 
 
-        
+
 
 
 
@@ -127,7 +129,7 @@ class ProductoController extends Controller
     {
         $productos=Producto::find($id);
        if (is_null($productos))
-        echo "No existe el plotter solicitado";    
+        echo "No existe el plotter solicitado";
        else
        {
         //Devolvemos la vista

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Tienda;
 use App\Models\User;
+use App\Models\Producto;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
@@ -29,19 +30,19 @@ class TiendaController extends Controller
      */
     public function index()
     {
-        //Controlador accede al modelo para enviarselo a vista 
+        //Controlador accede al modelo para enviarselo a vista
         $usuarios = User::all();
         if(!request()->has('id')){
-            return view('tiendas.index',['tiendas'=> Tienda::all(),'usuarios'=> $usuarios]); 
+            return view('tiendas.index',['tiendas'=> Tienda::all(),'usuarios'=> $usuarios]);
         } else{
             //echo Tienda::where('id_comerciante', request()->filled('r'))->first();
             return view('tiendas.index',['tiendas'=> Tienda::where('id_comerciante', request()->id)->get(),'usuarios'=> $usuarios]);
         }
 
-        
-        
+
+
         //Devolvemos la vista
-         
+
     }
     /**
      * Show the form for creating a new resource.
@@ -82,7 +83,7 @@ class TiendaController extends Controller
             Session::flash('tipoMensaje','danger');
             Session::flash('mensaje','Error, no se cumplen las validaciones. Compruebe todos los campos');
             //Volver con los errores
-            
+
             return Redirect::back()->withInput()->withErrors($validador);
         }else{
                 $tienda=new Tienda();
@@ -91,14 +92,14 @@ class TiendaController extends Controller
                 $tienda->id_comerciante=1;
 
             try{
-                //Almacenar en la BD 
+                //Almacenar en la BD
                 $tienda->save();
-                //Almacenar el archivo en el servidor 
+                //Almacenar el archivo en el servidor
                     //Volver al listado
                     //Mensaje de OK
                     Session::flash('tipoMensaje','success');
                     Session::flash('mensaje','Plotter creado correctamente');
-                
+
             }catch(\Exception $e){
                 echo $e->getMessage();
                 //Mensaje de KO
@@ -112,7 +113,7 @@ class TiendaController extends Controller
 
 
 
-        
+
 
 
 
@@ -127,12 +128,13 @@ class TiendaController extends Controller
     public function show($id)
     {
         $tienda=Tienda::find($id);
+        $productos = Producto::where('tienda_id', $id)->get();
        if (is_null($tienda))
-        echo "No existe el plotter solicitado";    
+        echo "No existe el plotter solicitado";
        else
        {
         //Devolvemos la vista
-        return view('tiendas.show',['tienda'=> $tienda]);
+        return view('tiendas.show',['tienda'=> $tienda, 'productos'=>$productos]);
        }
     }
 
