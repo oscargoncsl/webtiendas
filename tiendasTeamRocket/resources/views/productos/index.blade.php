@@ -6,9 +6,11 @@
 
 <h2>Catalogo   <!-- Button trigger modal -->
     <!-- Button trigger modal -->
+  @if(Auth::check())
   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
     Añadir productos
   </button>
+  @endif
 </h2>
 
   <table class="table">

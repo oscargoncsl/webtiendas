@@ -19,7 +19,8 @@ class ProductoController extends Controller
         //$this->middleware('auth');  //Todo lo que afecta a este controlador
         //$this->middleware('auth')->only('show','index');   //Solo a estas dos funciones
         //$this->middleware('auth')->except('index'); //Afecta a todo excepto a index
-        $this->middleware('tienda')->only('index', 'show','store','create','destroy','update','edit');
+        $this->middleware('invitado')->only('index', 'show');
+        $this->middleware('tienda')->only('store','create','destroy','update','edit');
 
     }
 
@@ -157,7 +158,50 @@ class ProductoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $datos = $request->all();
+        
+        $rules=array(
+            'imagen'=>'required|mimes:jpeg,jpg|max:1024*1024*1',
+            'brand'=>'required',
+            'IAMSPEED'=>'required|numeric',
+        );
+        $messages=array(
+            'imagen.required'=>'campo imagen es requerido',
+            //'imagen.mimes'=>'el tipo de archivo debe ser una imagen',
+            'imagen.image'=>'el tipo de archivo debe ser una imagen',
+            'imagen.max'=>'el tamaño de la imagen es excesivo',
+            'brand.required'=>'campo marca es requerido',
+            'IAMSPEED.required'=>'campo velocidad requerido',
+            'IAMSPEED.numeric'=>'campo velocidad debe ser un numero',
+        );
+        $validador=Validator::make($datos,$rules,$messages);
+        if($validador->fails()){
+            $errors=$validador->messages();
+            Session::flash('tipoMensaje','danger');
+            Session::flash('mensaje','Error,no se cumplen las validaciones.Compuebe los campos');
+            return Redirect::back()->withInput()->withErrors($validador);
+        }else{
+            $tienda=Tienda::find($id);
+            $tienda->ubicacion = $datos["ubicacion"];
+            
+            try{
+                //Almacenar en la BD
+                $tienda->save();
+
+                //Volver al listado
+                Session::flash('tipoMensaje','success');
+                Session::flash('mensaje','Plotter creado correctamente');
+                        //Volver al listado
+                return Redirect::back();
+            }catch(\Exception $e){
+                //$e->getMessage();
+                //volver a la página anterior con errores
+                Session::flash('tipoMensaje','danger');
+                Session::flash('mensaje','Error al crear el Plotter');
+            }
+        }
+        return Redirect::back();
+        //echo "Plotter Creado";
     }
 
     /**
