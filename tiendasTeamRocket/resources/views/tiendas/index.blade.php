@@ -10,6 +10,9 @@
       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
           Añadir comercio
       </button>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Añadir comerciante nuevo
+    </button>
     @endif
 
 </h2>

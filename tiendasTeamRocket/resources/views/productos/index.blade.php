@@ -4,7 +4,7 @@
 
 
 
-<h2>Catalogo   <!-- Button trigger modal -->
+<h2>Catalogo  <!-- Button trigger modal -->
     <!-- Button trigger modal -->
   @if(Auth::check() && Auth::user()->roles->name=='tienda')
   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
