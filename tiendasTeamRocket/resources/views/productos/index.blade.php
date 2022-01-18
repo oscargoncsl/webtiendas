@@ -99,6 +99,7 @@
     </div>
   </div>
 </form>
+
 <!--Envio correo de listado de productos-->
 <form method="POST" action="">
             <input type="text" placeholder="Introduce tu nombre" ></br>
