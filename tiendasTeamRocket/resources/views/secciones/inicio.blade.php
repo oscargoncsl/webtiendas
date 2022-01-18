@@ -9,13 +9,13 @@
 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="/webtiendas/tiendasTeamRocket/public/images/img_carrousel/computershop.jpg" class="d-block w-100" alt="tienda ordenadores">
+        <img src="{{asset('images/img_carrousel/computershop.jpg')}}" class="d-block w-100" alt="tienda ordenadores">
       </div>
       <div class="carousel-item">
-        <img src="/webtiendas/tiendasTeamRocket/public/images/img_carrousel/ropa.jpg" class="d-block w-100" alt="tienda ropa">
+        <img src="{{asset('images/img_carrousel/ropa.jpg')}}" class="d-block w-100" alt="tienda ropa">
       </div>
       <div class="carousel-item">
-        <img src="/webtiendas/tiendasTeamRocket/public/images/img_carrousel/comida.jpg" class="d-block w-100" alt="tienda comida">
+        <img src="{{asset('images/img_carrousel/comida.jpg')}}" class="d-block w-100" alt="tienda comida">
       </div>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
