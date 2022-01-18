@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\ControllerMail;
 use App\Http\Controllers\TiendaController;
 
 /*
@@ -26,3 +27,7 @@ Route::get('/',  function () {
 Auth::routes();
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// ruta al enviar correo
+Route::post('/send', 'ControllerMail@send');
+?>
