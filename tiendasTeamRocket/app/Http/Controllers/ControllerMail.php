@@ -11,8 +11,8 @@ class ControllerMail extends Controller
 {
   public function send(Request $request){
         $this->validate($request, [
-            'name'     =>  'required',
-            'email'  =>  'required|email'
+            'nombre'     =>  'required',
+            'correo'  =>  'required'
             ]);
 
         $data = array(

@@ -30,5 +30,5 @@ Auth::routes();
 
 // ruta al enviar correo
 //Route::post('/send', 'ControllerMail@send');
-Route::get('/send', [ControllerMail::class,'send']);
+Route::post('/send', [ControllerMail::class,'send']);
 ?>
