@@ -48,9 +48,19 @@
             </tr>
         @endforeach
 
+
     </tbody>
   </table>
 
+<!--Envio correo de listado de productos-->
+    <form method="POST" action="{{url('send')}}">
+    {{ csrf_field() }}
+        <label>Nombre</label>
+        <input type="text" name="nombre" id="nombre" class="form-control" value=""/>
+        <label> Email</label>
+        <input type="text" name="correo" id="correo" class="form-control" value=""/>
+        <input type="submit" name="send" class="btn btn-info" value="Enviar" />
+    </form>
 
 
 <!-- Modal -->
@@ -99,11 +109,5 @@
     </div>
   </div>
 </form>
-
-<!--Envio correo de listado de productos-->
-<form method="POST" action="">
-            <input type="text" placeholder="Introduce tu nombre" ></br>
-            <input type="email" placeholder="Introduce tu correo">
-        </form>
 </div>
 @endsection

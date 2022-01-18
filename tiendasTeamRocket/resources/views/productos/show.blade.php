@@ -39,7 +39,7 @@
 	<form action="{{route('productos.update',['producto' => $producto])}}" method="post">
 	@method('PUT')
 	@csrf
-			<article class="gallery-wrap"> 
+			<article class="gallery-wrap">
 	<div class="img-big-wrap">
 	<div> <a href="#"><img src="../images/producto/{{$producto->imagen}}" style="width:100%;"></a></div>
 	</div> <!-- slider-product.// -->
@@ -81,7 +81,7 @@
 				</dd>
 				</dl>  <!-- item-property .// -->
 			</div> <!-- col.// -->
-			
+
 		</div> <!-- row.// -->
 		<hr>
 			<a><input type="submit" class="btn btn-lg btn-success text-uppercase" value="Actualizar"></input></a>
