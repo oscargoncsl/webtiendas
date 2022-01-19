@@ -37,7 +37,7 @@ class ProductoController extends Controller
             return view('productos.index',['productos'=> Producto::all()]);
         } else{
             //echo Tienda::where('id_comerciante', request()->filled('r'))->first();
-            return view('productos.index',['productos'=> Producto::where('tienda_id', request()->id)->get(),'id'=>request()->id, 'nombre'=>Tienda::where('id'), request()->id)->get()]);
+            return view('productos.index',['productos'=> Producto::where('tienda_id', request()->id)->get(),'id'=>request()->id, 'nombre'=>Tienda::where('id', request()->id)->get()]);
         }
     }
     /**
