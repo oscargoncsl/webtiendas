@@ -37,7 +37,7 @@ class ProductoController extends Controller
             return view('productos.index',['productos'=> Producto::all()]);
         } else{
             //echo Tienda::where('id_comerciante', request()->filled('r'))->first();
-            return view('productos.index',['productos'=> Producto::where('tienda_id', request()->id)->get(),'id'=>request()->id]);
+            return view('productos.index',['productos'=> Producto::where('tienda_id', request()->id)->get(),'id'=>request()->id, 'nombre'=>Tienda::where('id'), request()->id)->get()]);
         }
     }
     /**
@@ -58,9 +58,9 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
-       Session::flash('message', 'This is a message!'); 
-Session::flash('alert-class', 'alert-danger'); 
-       
+       Session::flash('message', 'This is a message!');
+Session::flash('alert-class', 'alert-danger');
+
         Session::flash('tipoMensaje','danger');
         Session::flash('mensaje','Error, no se cumplen las validaciones. Compruebe todos los campos');
         //Recibir datos
@@ -166,7 +166,7 @@ Session::flash('alert-class', 'alert-danger');
     public function update(Request $request, Producto $producto)
     {
         $producto2=Producto::find($producto->id);
-        
+
         $datos=$request->all();
         // si los campos son null guarda elq ya tiene, sino coge el nuevo.
         if ($datos['descripcion']!=null){
@@ -182,7 +182,7 @@ Session::flash('alert-class', 'alert-danger');
             return Redirect::back();
         }//HABRIA K COMPROBAR TODOS LOS DATOS DE DATOS Y PLOTTER Y SI NO HAY CAMBIOS MANDAR SMS ERROR
 
-        
+
         $producto2->save();
         Session::flash('tipoMensaje', 'info');
         Session::flash('mensaje', 'Cambios guardados con éxito');
