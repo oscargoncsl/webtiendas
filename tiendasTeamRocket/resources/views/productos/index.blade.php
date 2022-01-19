@@ -63,11 +63,11 @@
           {{ csrf_field() }}
           <div class="mb-3">
             <label for="text" class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="text" placeholder="Introduce tu nombre">
+            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Introduce tu nombre">
           </div>
           <div class="mb-3">
             <label for="email" class="form-label">Email</label>
-            <input class="form-control" id="email" rows="3"  placeholder="Introduce tu email"/>
+            <input class="form-control" id="correo" name="correo" rows="3"  placeholder="Introduce tu email"/>
           </div>
           <button type="submit" class="btn btn-small btn-primary"  >Enviar</button>
         </form>
