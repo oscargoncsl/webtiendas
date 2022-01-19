@@ -52,15 +52,37 @@
     </tbody>
   </table>
 
-<!--Envio correo de listado de productos-->
-    <form method="POST" action="{{url('send')}}">
-    {{ csrf_field() }}
-        <label>Nombre</label>
-        <input type="text" name="nombre" id="nombre" class="form-control" value=""/>
-        <label> Email</label>
-        <input type="text" name="correo" id="correo" class="form-control" value=""/>
-        <input type="submit" name="send" class="btn btn-info" value="Enviar" />
-    </form>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <!--Envio correo de listado de productos-->
+
+        <h3>¿Quieres recibir el catalogo en tu email?</h3>
+        <p>Introduce tu nombre y el email donde quieras recibir el catalogo y recibiras un listado de los productos disponibles de este comercio. <br> Así siempre sabrás la disponibilidad de productos que tiene este comercio.</p>
+        <form method="POST" action="{{url('send')}}">
+          {{ csrf_field() }}
+          <div class="mb-3">
+            <label for="text" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="text" placeholder="Introduce tu nombre">
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input class="form-control" id="email" rows="3"  placeholder="Introduce tu email"/>
+          </div>
+          <button type="submit" class="btn btn-small btn-primary"  >Enviar</button>
+        </form>
+      </div>
+
+      <div class="col">
+        <img src="{{asset('images/imagenes_web/globos.jpg')}}" class="img-thumbnail" alt="...">
+      </div>
+    </div>
+  </div>
+
+
+
+
+
 
 
 <!-- Modal -->
