@@ -17,7 +17,7 @@ class ControllerMail extends Controller
 
         $data = array(
                 'nombre' =>  $request->input('nombre'),
-                'correo'=>   $request->input('correo')
+                'correo'=>   $request->input('correo'),
             );
 
             $email = $request->input('correo');

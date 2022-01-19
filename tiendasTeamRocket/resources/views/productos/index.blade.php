@@ -59,7 +59,7 @@
 
         <h3>¿Quieres recibir el catalogo en tu email?</h3>
         <p>Introduce tu nombre y el email donde quieras recibir el catalogo y recibiras un listado de los productos disponibles de este comercio. <br> Así siempre sabrás la disponibilidad de productos que tiene este comercio.</p>
-        <form method="POST" action="{{url('send')}}">
+        <form method="POST" action="{{url('send')}}?id={{request()->id}}">
           {{ csrf_field() }}
           <div class="mb-3">
             <label for="text" class="form-label">Nombre</label>

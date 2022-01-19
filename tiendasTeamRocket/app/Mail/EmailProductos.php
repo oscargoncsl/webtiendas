@@ -5,6 +5,7 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
+use App\Models\Producto;
 use Illuminate\Queue\SerializesModels;
 
 class EmailProductos extends Mailable
@@ -28,6 +29,6 @@ class EmailProductos extends Mailable
      */
     public function build()
     {
-        return $this->view('mails.mailProductos');
+        return $this->view('mails.mailProductos',['productos'=> Producto::where('tienda_id', request()->id)->get()]);
     }
 }
