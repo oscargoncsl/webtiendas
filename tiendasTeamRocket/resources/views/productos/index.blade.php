@@ -4,7 +4,7 @@
 
 
 
-<h2>Catalogo  <!-- Button trigger modal -->
+<h2>Catalogo de {{$tienda->nombre}} <!-- Button trigger modal -->
     <!-- Button trigger modal -->
   @if(Auth::check() && Auth::user()->roles->name=='tienda')
   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -26,7 +26,7 @@
       </tr>
     </thead>
     <tbody>
-        @foreach ($productos as $producto)
+        @foreach ($tienda->products as $producto)
             <tr>
                 <th scope="row">{{$producto->nombre}} </th>
                 <td>{{ $producto->descripcion }}</td>
@@ -118,7 +118,7 @@
             <input class="form-control" type="file" id="imagen" name="imagen">
           </div>
           <div class="col-12">
-            <input id="tiendaId" name="tiendaId" type="hidden" value={{$id}}>
+            <input id="tiendaId" name="tiendaId" type="hidden" value={{$tienda->id}}>
           </div>
 
 
